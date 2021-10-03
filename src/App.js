@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import HomeComponent from "./components/home.jsx";
+import LandingComponent from "./components/landing.jsx";
+import LoginComponent from "./components/login.jsx";
+import NewTransactionComponent from "./components/NewTransaction.jsx";
+import RegisterComponent from "./components/register.jsx";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Route path="/" exact component={LandingComponent} />
+      <Route path="/login" exact component={LoginComponent} />
+      <Route path="/register" exact component={RegisterComponent} />
+      <Route path="/home" exact component={HomeComponent} />
+      <Route
+        path="/home/transaction/new"
+        exact
+        component={NewTransactionComponent}
+      />
+    </BrowserRouter>
   );
 }
-
-export default App;

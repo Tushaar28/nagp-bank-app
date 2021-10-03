@@ -1,0 +1,107 @@
+{
+  "states": [
+    {
+      "id": 1,
+      "name": "Harayana"
+    },
+    {
+      "id": 2,
+      "name": "Punjab"
+    },
+    {
+      "id": 3,
+      "name": "Rajasthan"
+    },
+    {
+      "id": 4,
+      "name": "Uttar Pradesh"
+    }
+  ],
+  "cities": [
+    {
+      "id": "Harayana",
+      "name": [
+        "Gurgaon"
+      ]
+    },
+    {
+      "id": "Punjab",
+      "name": [
+        "Amritsar"
+      ]
+    },
+    {
+      "id": "Rajasthan",
+      "name": [
+        "Jaipur"
+      ]
+    },
+    {
+      "id": "Uttar Pradesh",
+      "name": [
+        "Meerut"
+      ]
+    }
+  ],
+  "accountTypes": [
+    {
+      "id": 1,
+      "type": "Savings"
+    },
+    {
+      "id": 2,
+      "type": "Current"
+    }
+  ],
+  "transactionTypes": [
+    {
+      "id": 1,
+      "type": "Deposit"
+    },
+    {
+      "id": 2,
+      "type": "Withdrawl"
+    }
+  ],
+  "users": [
+    {
+      "balance": 40,
+      "id": "Tushaar"
+    }
+  ],
+  "transactions": [
+    {
+      "id": 1633286637059,
+      "userId": "Tushaar",
+      "type": "Deposit",
+      "amount": "10"
+    },
+    {
+      "id": 1633287789211,
+      "userId": "Tushaar",
+      "type": "Deposit",
+      "amount": "10"
+    },
+    {
+      "id": 1633287949748,
+      "userId": "Tushaar",
+      "type": "Deposit",
+      "amount": "10"
+    },
+    {
+      "id": 1633288345817,
+      "userId": "Tushaar",
+      "type": "Deposit",
+      "amount": "500"
+    },
+    {
+      "id": 1633288399862,
+      "userId": "Tushaar",
+      "type": "Deposit",
+      "amount": 40
+    }
+  ],
+  "currentUser": {
+    "id": "Tushaar"
+  }
+}
