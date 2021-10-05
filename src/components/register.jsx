@@ -378,7 +378,6 @@ export default function RegisterComponent({ history }) {
             class="btn btn-primary btn-lg"
             type="submit"
             onClick={(e) => {
-              console.log("Sumit button");
               register(e);
             }}
           >

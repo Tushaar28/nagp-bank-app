@@ -12,6 +12,8 @@ export default function ProfileComponent(props) {
       var response;
       response = await axios.get(url);
       const userId = response.data.id;
+      if (userId === undefined || userId === null || userId === "")
+        props.history.replace("/login");
       url = BASE_URL + "/users/" + userId;
       response = await axios.get(url);
       setUser(response.data);

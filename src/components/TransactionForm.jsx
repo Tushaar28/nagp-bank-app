@@ -13,6 +13,8 @@ export default function TransactionForm({ user, history }) {
   const [message, setMessage] = useState("");
   const [notificationType, setNotificationType] = useState("info");
   const [openNotify, setOpenNotify] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -34,11 +36,24 @@ export default function TransactionForm({ user, history }) {
   }, []);
 
   const submit = async (e) => {
+    setLoading(true);
     e.preventDefault();
-    if (transactionType.toLowerCase() === "withdrawl" && amount > balance) {
+    if (
+      transactionType.toLowerCase() === "withdrawl" &&
+      Number(amount) > Number(balance)
+    ) {
       setMessage("Insufficient balance");
       setNotificationType("error");
       setOpenNotify(true);
+      setLoading(false);
+    } else if (
+      transactionType.toLowerCase() === "withdrawl" &&
+      Number(amount) < 10000
+    ) {
+      setMessage("Withdrawl amount cannot be less than Rs 10,000");
+      setNotificationType("error");
+      setOpenNotify(true);
+      setLoading(false);
     } else {
       var url = BASE_URL + "/transactions";
       const body = {
@@ -54,11 +69,13 @@ export default function TransactionForm({ user, history }) {
         setMessage("Something went wrong");
         setNotificationType("error");
         setOpenNotify(true);
+        setLoading(false);
       }
       if (response === undefined) {
         setMessage("Something went wrong");
         setNotificationType("error");
         setOpenNotify(true);
+        setLoading(false);
       } else {
         url = BASE_URL + "/users/" + user.id;
         let newBalance =
@@ -75,12 +92,16 @@ export default function TransactionForm({ user, history }) {
           setMessage("Something went wrong");
           setNotificationType("error");
           setOpenNotify(true);
+          setLoading(false);
         }
         if (response === undefined) {
           setMessage("Something went wrong");
           setNotificationType("error");
           setOpenNotify(true);
+          setLoading(false);
         } else {
+          setLoading(false);
+          setSuccess(true);
           setMessage("Transaction complete");
           setNotificationType("success");
           setOpenNotify(true);
@@ -187,13 +208,16 @@ export default function TransactionForm({ user, history }) {
           <div className="valid-feedback">Looks good!</div>
         </div>
         <div class="col-12" style={{ marginTop: "50px" }}>
-          <button
-            class="btn btn-primary btn-lg"
-            type="submit"
-            onClick={(e) => submit(e)}
-          >
-            Submit
-          </button>
+          {!success && (
+            <button
+              disabled={loading}
+              class="btn btn-primary btn-lg"
+              type="submit"
+              onClick={(e) => submit(e)}
+            >
+              {loading ? "Transaction in progress" : "Submit"}
+            </button>
+          )}
         </div>
       </form>
       <NotificationComponent

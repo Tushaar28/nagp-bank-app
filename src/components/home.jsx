@@ -14,6 +14,8 @@ export default function HomeComponent(props) {
       var response;
       response = await axios.get(url);
       const userId = response.data.id;
+      if (userId === undefined || userId === null || userId === "")
+        props.history.replace("/login");
       url = BASE_URL + "/users/" + userId;
       response = await axios.get(url);
       setUser(response.data);
@@ -27,7 +29,7 @@ export default function HomeComponent(props) {
         style={{ marginTop: "80px", marginLeft: "50px", marginRight: "50px" }}
       >
         <div className="row">
-          <div className="col-lg-2" style={{ marginTop: "100px" }}>
+          <div className="col-lg-2" style={{ marginTop: "300px" }}>
             <BalanceCard balance={user.balance} {...props} />
           </div>
           <div className="col-lg-10">

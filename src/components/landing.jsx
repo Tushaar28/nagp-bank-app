@@ -9,6 +9,9 @@ export default function LandingComponent({ history }) {
       var response;
       try {
         response = await axios.get(url);
+        const userId = response.data.id;
+        if (userId !== undefined && userId !== null && userId !== "")
+          history.replace("/home");
       } catch (error) {}
     })();
   }, []);
