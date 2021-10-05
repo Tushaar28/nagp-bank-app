@@ -65,40 +65,46 @@
   ],
   "users": [
     {
-      "balance": 40,
-      "id": "Tushaar"
+      "id": "Tushaar",
+      "date": "2021-10-04",
+      "accountNumber": "8968980024",
+      "accountType": "Current",
+      "state": "Punjab",
+      "city": "Amritsar",
+      "password": "123456",
+      "balance": 10
     }
   ],
   "transactions": [
     {
-      "id": 1633286637059,
+      "id": 1633289160698,
       "userId": "Tushaar",
-      "type": "Deposit",
-      "amount": "10"
+      "type": "Withdrawl",
+      "amount": 51
     },
     {
-      "id": 1633287789211,
+      "id": 1633352117812,
       "userId": "Tushaar",
       "type": "Deposit",
-      "amount": "10"
+      "amount": 500
     },
     {
-      "id": 1633287949748,
+      "id": 1633355378669,
       "userId": "Tushaar",
       "type": "Deposit",
-      "amount": "10"
+      "amount": 10
     },
     {
-      "id": 1633288345817,
+      "id": 1633355397927,
       "userId": "Tushaar",
-      "type": "Deposit",
-      "amount": "500"
+      "type": "Withdrawl",
+      "amount": 110
     },
     {
-      "id": 1633288399862,
+      "id": 1633355414505,
       "userId": "Tushaar",
       "type": "Deposit",
-      "amount": 40
+      "amount": 10
     }
   ],
   "currentUser": {

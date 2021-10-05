@@ -3,7 +3,7 @@ import BASE_URL from "../services/api";
 import NotificationComponent from "./shared/notification.jsx";
 import React, { useState, useEffect } from "react";
 
-export default function TransactionForm({ user }) {
+export default function TransactionForm({ user, history }) {
   const [transactionType, setTransactionType] = useState("");
   const [availableTransactionTypes, setAvailableTransactionTypes] = useState(
     []
@@ -63,9 +63,10 @@ export default function TransactionForm({ user }) {
         url = BASE_URL + "/users/" + user.id;
         let newBalance =
           transactionType.toLowerCase() === "withdrawl"
-            ? Number(balance - amount)
-            : Number(balance + amount);
+            ? Number(user.balance - Number(amount))
+            : Number(user.balance + Number(amount));
         const body = {
+          ...user,
           balance: newBalance,
         };
         try {
@@ -83,6 +84,9 @@ export default function TransactionForm({ user }) {
           setMessage("Transaction complete");
           setNotificationType("success");
           setOpenNotify(true);
+          setTimeout(function () {
+            history.replace("/home");
+          }, 2000);
         }
       }
     }

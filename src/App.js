@@ -4,6 +4,7 @@ import HomeComponent from "./components/home.jsx";
 import LandingComponent from "./components/landing.jsx";
 import LoginComponent from "./components/login.jsx";
 import NewTransactionComponent from "./components/NewTransaction.jsx";
+import ProfileComponent from "./components/profile.jsx";
 import RegisterComponent from "./components/register.jsx";
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         exact
         component={NewTransactionComponent}
       />
+      <Route path="/home/profile" exact component={ProfileComponent} />
     </BrowserRouter>
   );
 }

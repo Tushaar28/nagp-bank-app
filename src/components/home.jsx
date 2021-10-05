@@ -2,6 +2,8 @@ import axios from "axios";
 import BASE_URL from "../services/api";
 import React, { useEffect, useState } from "react";
 import NavbarComponent from "./shared/navbar";
+import ViewTransactionsComponent from "./ViewTransactions";
+import BalanceCard from "./shared/BalanceCard.jsx";
 
 export default function HomeComponent(props) {
   const [user, setUser] = useState(null);
@@ -14,7 +16,6 @@ export default function HomeComponent(props) {
       const userId = response.data.id;
       url = BASE_URL + "/users/" + userId;
       response = await axios.get(url);
-      console.log(response.data);
       setUser(response.data);
     })();
   }, []);
@@ -22,6 +23,18 @@ export default function HomeComponent(props) {
   return user !== null ? (
     <div>
       <NavbarComponent {...props} />
+      <div
+        style={{ marginTop: "80px", marginLeft: "50px", marginRight: "50px" }}
+      >
+        <div className="row">
+          <div className="col-lg-2" style={{ marginTop: "100px" }}>
+            <BalanceCard balance={user.balance} {...props} />
+          </div>
+          <div className="col-lg-10">
+            <ViewTransactionsComponent {...props} />
+          </div>
+        </div>
+      </div>
     </div>
   ) : null;
 }

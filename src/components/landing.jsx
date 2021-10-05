@@ -10,7 +10,6 @@ export default function LandingComponent({ history }) {
       try {
         response = await axios.get(url);
       } catch (error) {}
-      console.log(response.data);
     })();
   }, []);
 
