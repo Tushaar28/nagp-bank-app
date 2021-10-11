@@ -21,10 +21,11 @@ export default function RegisterComponent({ history }) {
   const [message, setMessage] = useState("");
   const [notificationType, setNotificationType] = useState("info");
   const [openNotify, setOpenNotify] = useState(false);
+  const [usernames, setUsernames] = useState(null);
 
   useEffect(() => {
     (async () => {
-      const url = BASE_URL + "/states";
+      var url = BASE_URL + "/states";
       var response;
       try {
         response = await axios.get(url);
@@ -38,6 +39,20 @@ export default function RegisterComponent({ history }) {
         temp.push(response.data[i]["name"]);
       }
       setAvailableStates(temp);
+      url = BASE_URL + "/users";
+      try {
+        response = await axios.get(url);
+        var temp = [];
+        for (let i = 0; i < response.data.length; i++) {
+          temp.push(response.data[i]["id"]);
+        }
+        const set = new Set(temp);
+        setUsernames(set);
+      } catch (error) {
+        setMessage("Something went wrong");
+        setNotificationType("error");
+        setOpenNotify(true);
+      }
     })();
 
     (async () => {
@@ -83,6 +98,10 @@ export default function RegisterComponent({ history }) {
       setMessage("Passwords do not match");
       setNotificationType("error");
       setOpenNotify(true);
+    } else if (usernames.has(username)) {
+      setMessage("Username already exists");
+      setNotificationType("error");
+      setOpenNotify(true);
     } else {
       const url = BASE_URL + "/users";
       const body = {
@@ -98,18 +117,19 @@ export default function RegisterComponent({ history }) {
       var response;
       try {
         response = await axios.post(url, body);
+
+        if (response.status === 500) throw new Error("Something went wrong");
+        setMessage("Registration complete");
+        setNotificationType("success");
+        setOpenNotify(true);
+        setTimeout(function () {
+          history.replace("/login");
+        }, 2000);
       } catch (e) {
         setMessage("Something went wrong");
         setNotificationType("error");
         setOpenNotify(true);
       }
-
-      setMessage("Registration complete");
-      setNotificationType("success");
-      setOpenNotify(true);
-      setTimeout(function () {
-        history.replace("/login");
-      }, 2000);
     }
   };
 
