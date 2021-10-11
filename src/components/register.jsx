@@ -116,6 +116,9 @@ export default function RegisterComponent({ history }) {
   return (
     <div style={{ marginLeft: "100px", marginTop: "30px" }}>
       <h1>Registration Form</h1>
+      <div style={{ marginTop: "30px" }}>
+        <a href="/login">Back to login</a>
+      </div>
       <form
         style={{
           marginTop: "50px",

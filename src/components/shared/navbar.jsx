@@ -11,14 +11,13 @@ const NavbarComponent = (props) => {
   const [notificationType, setNotificationType] = useState("info");
   const [openNotify, setOpenNotify] = useState(false);
   const linkStyle = { color: "white", marginRight: "20px" };
-  const { history } = props;
 
   useEffect(() => {
     (async () => {
-      var url = BASE_URL + "/currentUser";
+      var url = BASE_URL + "/currentUser/1";
       var response;
       response = await axios.get(url);
-      const userId = response.data.id;
+      const userId = response.data.user;
       if (userId === undefined || userId === null || userId === "")
         props.history.replace("/login");
       url = BASE_URL + "/users/" + userId;
@@ -28,16 +27,17 @@ const NavbarComponent = (props) => {
   }, []);
 
   const logout = async (e) => {
-    const url = BASE_URL + "/currentUser/" + user.id;
+    const url = BASE_URL + "/currentUser/1";
     var response;
     try {
       response = await axios.delete(url);
-      history.replace("/login");
+      window.location.href = "/login";
     } catch (error) {
+      // alert(error.toString());
       setMessage("Something went wrong");
       setNotificationType("error");
       setOpenNotify(true);
-      history.replace("/login");
+      window.location.href = "/login";
     }
   };
 
@@ -51,18 +51,18 @@ const NavbarComponent = (props) => {
             <Link to="/home" style={linkStyle}>
               Dashboard
             </Link>
-            <Link to="/home/profile" style={linkStyle}>
-              My profile
-            </Link>
             <Link to="/home/transaction/new" style={linkStyle}>
               New Transaction
             </Link>
+            <Link to="/home/profile" style={linkStyle}>
+              My profile
+            </Link>
           </Nav>
-          {/* <Nav>
+          <Nav>
             <Link style={linkStyle} onClick={(e) => logout(e)}>
               Sign Out
             </Link>
-          </Nav> */}
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
       <NotificationComponent

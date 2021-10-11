@@ -149,7 +149,5 @@
       "amount": 10000
     }
   ],
-  "currentUser": {
-    "id": ""
-  }
+  "currentUser": []
 }

@@ -10,10 +10,10 @@ export default function HomeComponent(props) {
 
   useEffect(() => {
     (async () => {
-      var url = BASE_URL + "/currentUser";
+      var url = BASE_URL + "/currentUser/1";
       var response;
       response = await axios.get(url);
-      const userId = response.data.id;
+      const userId = response.data.user;
       if (userId === undefined || userId === null || userId === "")
         props.history.replace("/login");
       url = BASE_URL + "/users/" + userId;

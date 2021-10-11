@@ -70,7 +70,8 @@ export default function LoginComponent({ history }) {
     } else {
       url = BASE_URL + "/currentUser";
       const body = {
-        id: response.data["id"],
+        id: 1,
+        user: response.data["id"],
       };
       try {
         response = await axios.post(url, body);
@@ -166,6 +167,12 @@ export default function LoginComponent({ history }) {
           </Button>
         </Grid>
       </form>
+      <div
+        style={{ marginLeft: "800px", marginTop: "600px", display: "inline" }}
+      >
+        Don't have an account yet?
+        <a href="/register">Create one</a>
+      </div>
       <NotificationComponent
         openNotify={openNotify}
         setOpenNotify={setOpenNotify}
